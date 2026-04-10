@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ирина Фрид — Дизайн, который продаёт</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pink:    #f2c4ce;
+  --rose:    #e8879a;
+  --deep:    #c0415c;
+  --cream:   #faf8f5;
+  --warm:    #f5f0ea;
+  --charcoal:#1c1c1c;
+  --mid:     #555;
+  --light:   #888;
+  --white:   #fff;
+  --purple:  #b8a4d4;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Montserrat', sans-serif; background: var(--cream); color: var(--charcoal); overflow-x: hidden; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 60px;
+  background: rgba(250,248,245,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,150,160,0.15);
+  transition: box-shadow .3s;
+}
+nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.07); }
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-style: italic; font-weight: 400;
+  color: var(--charcoal); text-decoration: none; letter-spacing: .04em;
+}
+
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 12px; font-weight: 500; text-transform: uppercase;
+  letter-spacing: .12em; color: var(--mid); text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--deep); }
+
+.nav-cta {
+  background: var(--charcoal); color: var(--white);
+  font-size: 12px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .1em; padding: 12px 28px; border-radius: 40px;
+  text-decoration: none; transition: background .25s, transform .2s;
+}
+.nav-cta:hover { background: var(--deep); transform: translateY(-1px); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh; display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center; padding: 120px 60px 80px;
+  position: relative; overflow: hidden;
+}
+
+.hero-blob {
+  position: absolute; right: -80px; top: -60px;
+  width: 55vw; height: 110vh;
+  background: linear-gradient(135deg, var(--pink) 0%, #f7d5dc 40%, var(--purple) 100%);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  opacity: .45; z-index: 0;
+}
+.hero-blob-2 {
+  position: absolute; left: -120px; bottom: -80px;
+  width: 40vw; height: 60vh;
+  background: radial-gradient(circle, var(--pink) 0%, transparent 70%);
+  opacity: .25; z-index: 0;
+}
+
+.hero-left { position: relative; z-index: 1; }
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(192,65,92,0.1); border: 1px solid rgba(192,65,92,0.2);
+  border-radius: 40px; padding: 6px 16px;
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .12em; color: var(--deep); margin-bottom: 28px;
+}
+.hero-tag::before {
+  content: ''; width: 6px; height: 6px;
+  background: var(--deep); border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+
+.hero-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 6vw, 88px);
+  font-style: italic; font-weight: 300;
+  line-height: 1.05; margin-bottom: 8px;
+  color: var(--charcoal);
+}
+.hero-h1 span { color: var(--deep); }
+
+.hero-h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(28px, 3.5vw, 52px);
+  font-weight: 800; text-transform: uppercase;
+  letter-spacing: .04em; margin-bottom: 32px;
+  color: var(--charcoal);
+}
+
+.hero-desc {
+  font-size: 15px; line-height: 1.85; color: var(--mid);
+  max-width: 480px; margin-bottom: 48px;
+}
+
+.hero-actions { display: flex; gap: 16px; align-items: center; }
+
+.btn-primary {
+  background: var(--charcoal); color: var(--white);
+  padding: 16px 36px; border-radius: 40px;
+  font-size: 13px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .1em; text-decoration: none;
+  transition: all .25s; border: 2px solid var(--charcoal);
+  box-shadow: 0 8px 30px rgba(28,28,28,0.2);
+}
+.btn-primary:hover { background: var(--deep); border-color: var(--deep); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(192,65,92,0.35); }
+
+.btn-outline {
+  border: 2px solid var(--charcoal); color: var(--charcoal);
+  padding: 16px 36px; border-radius: 40px;
+  font-size: 13px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .1em; text-decoration: none; transition: all .25s;
+}
+.btn-outline:hover { background: var(--charcoal); color: var(--white); }
+
+.hero-right {
+  position: relative; z-index: 1;
+  display: flex; justify-content: center; align-items: flex-end;
+}
+
+.hero-photo-wrap {
+  position: relative; width: 420px; height: 540px;
+}
+
+.hero-photo-card {
+  position: absolute; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 360px; height: 480px;
+  background: linear-gradient(160deg, var(--pink), var(--purple));
+  border-radius: 60% 40% 40% 60% / 50% 50% 50% 50%;
+  overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+}
+.hero-photo-card img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+.hero-stat {
+  position: absolute; background: var(--white);
+  border-radius: 16px; padding: 14px 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+.hero-stat:nth-child(2) { top: 40px; left: -20px; animation-delay: -1s; }
+.hero-stat:nth-child(3) { bottom: 60px; right: -30px; animation-delay: -2s; }
+
+.hero-stat .num { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; color: var(--charcoal); }
+.hero-stat .label { font-size: 11px; color: var(--light); text-transform: uppercase; letter-spacing: .08em; }
+
+/* PAIN POINTS */
+.pain { padding: 80px 64px; background: var(--charcoal); }
+.pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.pain-item {
+  padding: 40px 32px; background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05); transition: background .3s;
+}
+.pain-item:hover { background: rgba(176,51,88,0.08); border-color: rgba(176,51,88,0.2); }
+.pain-q { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 12px; line-height: 1.4; }
+.pain-a { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.7; }
+.pain-header {
+  text-align: center; margin-bottom: 48px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3vw, 44px); font-weight: 300; color: var(--white); line-height: 1.2;
+}
+.pain-header em { color: var(--pink); font-style: italic; }
+
+/* SERVICES */
+.services { padding: 120px 64px; }
+.eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .2em; color: var(--rose); margin-bottom: 14px; }
+.section-h {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(34px, 4vw, 58px); font-weight: 300; line-height: 1.1; margin-bottom: 64px;
+}
+.services-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.svc {
+  border: 1px solid rgba(176,51,88,0.12); border-radius: 20px;
+  padding: 40px; background: var(--white);
+  transition: all .3s; position: relative; overflow: hidden;
+}
+.svc::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(to right, var(--deep), var(--pink));
+  transform: scaleX(0); transform-origin: left; transition: transform .3s;
+}
+.svc:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(176,51,88,0.1); border-color: rgba(176,51,88,0.25); }
+.svc:hover::before { transform: scaleX(1); }
+.svc-num { font-family: 'Cormorant Garamond', serif; font-size: 52px; color: rgba(176,51,88,0.1); font-weight: 600; line-height: 1; margin-bottom: 16px; }
+.svc-name { font-size: 17px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px; }
+.svc-tagline { font-size: 14px; color: var(--deep); font-weight: 500; margin-bottom: 12px; }
+.svc-desc { font-size: 13px; line-height: 1.8; color: var(--mid); margin-bottom: 20px; }
+.svc-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.svc-list li { font-size: 12px; color: var(--mid); padding-left: 16px; position: relative; }
+.svc-list li::before { content: '→'; position: absolute; left: 0; color: var(--rose); font-size: 11px; }
+
+/* CASES */
+.cases { padding: 120px 64px; background: var(--warm); }
+.cases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+
+.case {
+  background: var(--white); border-radius: 24px; overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05); transition: all .35s;
+  display: flex; flex-direction: column;
+}
+.case:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.1); }
+/* .case.big removed - all equal */
+
+.case-visual {
+  position: relative; overflow: hidden; flex-shrink: 0;
+  background: var(--warm);
+}
+.case:not(.big) .case-visual { height: 400px; }
+
+.case-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.case-visual-placeholder:has(img) { background: #1a1a1a; }
+.case:hover .case-visual img { transform: scale(1.04); }
+.case-visual-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 56px;
+  background: linear-gradient(135deg, var(--pink) 0%, #d4b4c8 100%);
+}
+
+.case-body { padding: 32px; flex: 1; display: flex; flex-direction: column; }
+
+.case-cat {
+  display: inline-block; border-radius: 20px; padding: 4px 14px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em;
+  color: var(--deep); background: rgba(176,51,88,0.08);
+  border: 1px solid rgba(176,51,88,0.15); margin-bottom: 14px;
+}
+.case-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; line-height: 1.2; margin-bottom: 6px; }
+
+.case-role { font-size: 11px; color: var(--light); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 16px; }
+.case-desc { font-size: 13px; line-height: 1.85; color: var(--mid); flex: 1; }
+.case-result {
+  margin-top: 20px; padding: 16px; border-radius: 12px;
+  background: rgba(176,51,88,0.05); border-left: 3px solid var(--deep);
+}
+.case-result-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--deep); margin-bottom: 6px; }
+.case-result-text { font-size: 12px; line-height: 1.7; color: var(--charcoal); }
+
+/* WHY ME */
+.why { padding: 120px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.why-list { display: flex; flex-direction: column; gap: 32px; margin-top: 48px; }
+.why-item { display: flex; gap: 20px; align-items: flex-start; }
+.why-icon {
+  width: 48px; height: 48px; border-radius: 14px; flex-shrink: 0;
+  background: rgba(176,51,88,0.08); display: flex; align-items: center; justify-content: center;
+  font-size: 22px; border: 1px solid rgba(176,51,88,0.12);
+}
+.why-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.why-desc { font-size: 13px; line-height: 1.75; color: var(--mid); }
+
+.why-right { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.why-stat {
+  background: var(--white); border-radius: 20px; padding: 28px 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05); text-align: center;
+  border: 1px solid rgba(176,51,88,0.08); transition: all .3s;
+}
+.why-stat:hover { border-color: var(--rose); transform: translateY(-4px); }
+.why-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 400; color: var(--deep); line-height: 1; }
+.why-stat-num sub { font-size: 22px; }
+.why-stat-label { font-size: 11px; color: var(--light); text-transform: uppercase; letter-spacing: .08em; margin-top: 8px; line-height: 1.5; }
+.why-stat.accent { background: var(--deep); border-color: var(--deep); }
+.why-stat.accent .why-stat-num { color: var(--white); }
+.why-stat.accent .why-stat-label { color: rgba(255,255,255,0.55); }
+
+/* PROCESS */
+.process { padding: 80px 64px; background: var(--charcoal); }
+.process .section-h { color: var(--white); }
+.process .eyebrow { color: var(--pink); }
+.process-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+.process-row::after {
+  content: ''; position: absolute; top: 36px; left: 12.5%; right: 12.5%;
+  height: 1px; background: linear-gradient(to right, rgba(176,51,88,.4), rgba(242,196,206,.4), rgba(176,51,88,.4));
+}
+.proc {
+  text-align: center; padding: 0 24px; position: relative; z-index: 1;
+}
+.proc-circle {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--charcoal); border: 2px solid var(--rose);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;
+  font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--pink);
+  transition: all .3s;
+}
+.proc:hover .proc-circle { background: var(--deep); border-color: var(--deep); color: var(--white); }
+.proc-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--white); margin-bottom: 10px; }
+.proc-desc { font-size: 12px; line-height: 1.7; color: rgba(255,255,255,0.38); }
+
+/* ─── CONTACT ─── */
+.contact { padding: 120px 64px; text-align: center; }
+.contact .eyebrow { justify-content: center; display: flex; }
+.contact-h {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5vw, 68px); font-weight: 300; line-height: 1.1;
+  margin-bottom: 20px;
+}
+.contact-h em { font-style: italic; color: var(--deep); }
+.contact-sub { font-size: 15px; color: var(--mid); max-width: 520px; margin: 0 auto 56px; line-height: 1.8; }
+.contact-box {
+  max-width: 640px; margin: 0 auto; text-align: left;
+  background: var(--white); border-radius: 28px;
+  padding: 48px; box-shadow: 0 8px 48px rgba(0,0,0,0.08);
+  border: 1px solid rgba(176,51,88,0.1);
+}
+.contact-links { display: flex; flex-direction: column; gap: 14px; text-align: left; }
+.c-link {
+  display: flex; align-items: center; gap: 16px;
+  padding: 18px 24px; border-radius: 14px;
+  background: var(--warm); text-decoration: none; transition: all .25s;
+  border: 1px solid transparent;
+}
+.c-link:hover { border-color: var(--rose); background: var(--white); box-shadow: 0 4px 20px rgba(176,51,88,0.1); transform: translateX(4px); }
+.c-link-icon { font-size: 24px; width: 44px; text-align: center; }
+.c-link-info strong { display: block; font-size: 14px; font-weight: 700; color: var(--charcoal); }
+.c-link-info span { font-size: 12px; color: var(--light); }
+.c-link-arr { margin-left: auto; color: var(--rose); font-size: 18px; transition: transform .2s; }
+.c-link:hover .c-link-arr { transform: translateX(4px); }
+.contact-legal { margin-top: 32px; font-size: 11px; color: var(--light); line-height: 1.8; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--charcoal); padding: 40px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; z-index: 1;
+}
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: var(--white); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.35); }
+
+/* ─── ANIMATIONS ─── */
+.reveal { opacity: 1; transform: none; }
+.reveal.up { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+.reveal-delay-4 { transition-delay: .4s; }
+
+@keyframes heroIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+.hero-tag { animation: heroIn .7s ease both; }
+.hero-h1  { animation: heroIn .8s ease .1s both; }
+.hero-h2  { animation: heroIn .8s ease .2s both; }
+.hero-desc{ animation: heroIn .8s ease .3s both; }
+.hero-actions { animation: heroIn .8s ease .4s both; }
+.hero-right { animation: heroIn 1s ease .2s both; }
+
+/* ─── RESPONSIVE ─── */
+
+/* ─── TABLET (≤1024px) ─── */
+@media (max-width: 1024px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .nav-cta { padding: 10px 20px; font-size: 11px; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 100px 32px 60px;
+    text-align: center;
+    gap: 40px;
+  }
+  .hero-desc { max-width: 100%; }
+  .hero-actions { justify-content: center; }
+  .hero-right { display: flex; justify-content: center; margin-top: 0; }
+  .hero-photo-wrap { width: 340px; height: 420px; }
+  .hero-photo-card { width: 290px; height: 370px; }
+  .hero-trust { justify-content: center; }
+
+  .pain { padding: 60px 32px; }
+  .pain-grid { grid-template-columns: 1fr; gap: 2px; }
+
+  .services { padding: 80px 32px; }
+  .services-list { grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .cases { padding: 80px 32px; }
+  .cases-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .case { height: auto; }
+  .case-visual { height: 200px; }
+
+  .why { padding: 80px 32px; grid-template-columns: 1fr; gap: 48px; }
+  .why-right { grid-template-columns: 1fr 1fr; }
+
+  .process { padding: 60px 32px; }
+  .process-row { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .process-row::after { display: none; }
+
+  .contact { padding: 80px 32px; }
+  .contact-box { padding: 32px; }
+
+  footer { padding: 28px 32px; flex-direction: column; gap: 10px; text-align: center; }
+}
+
+/* ─── MOBILE (≤640px) ─── */
+@media (max-width: 640px) {
+  nav { padding: 14px 20px; }
+  .nav-cta { padding: 9px 16px; font-size: 10px; }
+
+  .hero {
+    padding: 90px 20px 48px;
+    gap: 32px;
+  }
+  .hero-h1 { font-size: 36px; }
+  .hero-h2 { font-size: clamp(22px, 7vw, 32px); }
+  .hero-desc { font-size: 14px; }
+  .hero-tag { font-size: 10px; padding: 5px 14px; }
+  .hero-actions { flex-direction: column; align-items: center; gap: 10px; }
+  .btn-primary, .btn-outline, .btn-main, .btn-ghost { width: 100%; text-align: center; padding: 14px 24px; }
+  .hero-right { display: none; }
+  .hero-trust { flex-wrap: wrap; gap: 20px; justify-content: center; }
+  .trust-num { font-size: 28px; }
+
+  .pain { padding: 48px 20px; }
+  .pain-header { font-size: 26px; }
+  .pain-item { padding: 28px 20px; }
+  .pain-q { font-size: 14px; }
+
+  .section-h { font-size: clamp(26px, 7vw, 40px); margin-bottom: 36px; }
+  .eyebrow { font-size: 10px; }
+
+  .services { padding: 56px 20px; }
+  .services-list { grid-template-columns: 1fr; gap: 16px; }
+  .svc { padding: 28px 24px; }
+  .svc-name { font-size: 15px; }
+
+  .cases { padding: 56px 20px; }
+  .cases-grid { grid-template-columns: 1fr; gap: 20px; }
+  .case { height: auto; }
+  .case-visual { height: 220px; }
+  .case-body { padding: 22px; }
+  .case-name { font-size: 20px; }
+
+  .why { padding: 56px 20px; grid-template-columns: 1fr; }
+  .why-right { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .why-stat { padding: 20px 16px; }
+  .why-stat-num { font-size: 36px; }
+  .why-item { gap: 14px; }
+  .why-icon { width: 40px; height: 40px; font-size: 18px; }
+
+  .process { padding: 48px 20px; }
+  .process-row { grid-template-columns: 1fr; gap: 32px; }
+  .proc-circle { width: 60px; height: 60px; font-size: 22px; }
+
+  .contact { padding: 56px 20px; }
+  .contact-h { font-size: clamp(28px, 8vw, 44px); }
+  .contact-sub { font-size: 14px; }
+  .contact-box { padding: 24px 20px; border-radius: 20px; }
+  .c-link { padding: 14px 16px; gap: 12px; }
+  .c-link-icon { font-size: 20px; width: 36px; }
+  .c-link-info strong { font-size: 13px; }
+  .c-link-info span { font-size: 11px; }
+
+  footer { padding: 24px 20px; gap: 8px; }
+  .footer-logo { font-size: 18px; }
+  .footer-copy { font-size: 10px; }
+
+  .cookie-banner { padding: 16px 20px; flex-direction: column; gap: 12px; bottom: 12px; width: calc(100% - 24px); }
+  .cookie-btns { width: 100%; justify-content: center; }
+  .cookie-accept, .cookie-decline { flex: 1; text-align: center; }
+
+  .privacy-modal { padding: 32px 20px; border-radius: 16px; }
+  .privacy-modal h2 { font-size: 26px; }
+}
+
+
+/* COOKIE BANNER */
+.cookie-banner {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  z-index: 999; width: calc(100% - 48px); max-width: 720px;
+  background: var(--charcoal); color: rgba(255,255,255,0.85);
+  border-radius: 18px; padding: 20px 28px;
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+}
+@keyframes slideUp { from{opacity:0;transform:translateX(-50%) translateY(20px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+.cookie-banner.hidden { display: none; }
+.cookie-text { flex: 1; font-size: 13px; line-height: 1.6; min-width: 200px; }
+.cookie-text a { color: var(--pink); text-decoration: underline; cursor: pointer; }
+.cookie-btns { display: flex; gap: 10px; flex-shrink: 0; }
+.cookie-accept {
+  background: var(--deep); color: var(--white);
+  border: none; border-radius: 40px; padding: 10px 24px;
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; cursor: pointer; transition: background .2s;
+}
+.cookie-accept:hover { background: var(--rose); }
+.cookie-decline {
+  background: transparent; color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 40px; padding: 10px 20px;
+  font-size: 12px; cursor: pointer; transition: all .2s;
+}
+.cookie-decline:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+
+/* PRIVACY MODAL */
+.privacy-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.privacy-overlay.open { opacity: 1; pointer-events: all; }
+.privacy-modal {
+  background: var(--cream); border-radius: 24px;
+  max-width: 720px; width: 100%; max-height: 85vh;
+  overflow-y: auto; padding: 48px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+  position: relative;
+}
+.privacy-modal h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px; font-weight: 300; margin-bottom: 8px; color: var(--charcoal);
+}
+.privacy-modal .privacy-date { font-size: 12px; color: var(--light); margin-bottom: 32px; }
+.privacy-modal h3 {
+  font-size: 14px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--deep); margin: 28px 0 10px;
+}
+.privacy-modal p, .privacy-modal li {
+  font-size: 13px; line-height: 1.85; color: var(--mid); margin-bottom: 8px;
+}
+.privacy-modal ul { padding-left: 20px; }
+.privacy-close {
+  position: absolute; top: 20px; right: 24px;
+  background: none; border: none; font-size: 28px; cursor: pointer;
+  color: var(--light); line-height: 1; transition: color .2s;
+}
+.privacy-close:hover { color: var(--charcoal); }
+.privacy-link {
+  color: var(--deep); text-decoration: underline; cursor: pointer;
+  background: none; border: none; font-size: inherit; font-family: inherit;
+}
+
+/* Footer privacy link */
+.footer-privacy { font-size: 11px; color: rgba(255,255,255,0.35); cursor: pointer; text-decoration: underline; }
+.footer-privacy:hover { color: rgba(255,255,255,0.6); }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">Ирина Фрид</a>
+  <ul class="nav-links">
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#cases">Кейсы</a></li>
+    <li><a href="#why">Почему я</a></li>
+    <li><a href="#contact">Контакты</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Написать мне</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob"></div>
+  <div class="hero-blob-2"></div>
+  <div class="hero-left">
+    <div class="hero-tag">Открыта к новым проектам</div>
+    <h1 class="hero-h1">Ваш бизнес заслуживает<br><span>дизайна,который работает</span></h1>
+    <h2 class="hero-h2"></h2>
+    <p class="hero-desc"><b>Не просто красиво — а так, чтобы клиенты доверяли и покупали.</b><br><br>Помогаю малому и среднему бизнесу выглядеть убедительно: создаю брендинг, презентации и документы, которые продают вместо вас — даже когда вас нет рядом.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#cases">Смотреть кейсы</a>
+      <a class="btn-outline" href="#contact">Обсудить проект</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-wrap">
+      <div class="hero-stat" style="top:40px;left:-20px">
+        <div class="num">3+</div>
+        <div class="label">года в<br>дизайне</div>
+      </div>
+      <div class="hero-photo-card">
+        <img src="images/my_photo.jpg" alt="my photo">
+      </div>
+      <div class="hero-stat" style="bottom:60px;right:-30px">
+        <div class="num">25<span style="font-size:20px;color:var(--rose)">+</span></div>
+        <div class="label">успешных<br>проектов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="pain">
+  <div class="pain-header r">Узнаёте себя?<br><em>Это решаемо.</em></div>
+  <div class="pain-grid">
+    <div class="pain-item r d1">
+      <div class="pain-q">«У нас есть продукт, но никто не воспринимает нас серьёзно»</div>
+      <div class="pain-a">Непоследовательный визуал убивает доверие раньше, чем клиент прочтёт первое слово. Системный брендинг это исправляет.</div>
+    </div>
+    <div class="pain-item r d2">
+      <div class="pain-q">«Делаю презентацию на переговоры, но не знаю как её выстроить»</div>
+      <div class="pain-a">Структура убеждает сильнее, чем красивые слайды. Я выстраиваю логику от первой страницы до финального призыва к действию.</div>
+    </div>
+    <div class="pain-item r d3">
+      <div class="pain-q">«Есть куча материалов, но они все в разном стиле»</div>
+      <div class="pain-a">Разрозненные файлы — это потеря узнаваемости. Привожу всё к единой системе: логика, иерархия, единый визуальный язык.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="eyebrow r">Услуги</div>
+  <div class="section-h r">Что я создаю —<br>и зачем это вашему бизнесу</div>
+  <div class="services-list">
+    <div class="svc r d1">
+      <div class="svc-num">01</div>
+      <div class="svc-name">Брендинг</div>
+      <div class="svc-tagline">Станьте узнаваемыми — с первого взгляда</div>
+      <p class="svc-desc">Разрабатываю визуальную систему, которая отражает суть вашего бизнеса и отличает вас от конкурентов. Не декор — а инструмент позиционирования.</p>
+      <ul class="svc-list">
+        <li>Логотип и фирменный стиль</li>
+        <li>Цветовая система и типографика</li>
+        <li>Брендбук / гайдлайн</li>
+        <li>Упаковка и носители бренда</li>
+      </ul>
+    </div>
+    <div class="svc r d2">
+      <div class="svc-num">02</div>
+      <div class="svc-name">Презентации & КП</div>
+      <div class="svc-tagline">Заходите на переговоры подготовленными</div>
+      <p class="svc-desc">Создаю презентации, которые объясняют ценность продукта за 30 секунд. Выстраиваю структуру так, чтобы клиент сам пришёл к нужному решению.</p>
+      <ul class="svc-list">
+        <li>Коммерческие предложения</li>
+        <li>Инвест- и партнёрские презентации</li>
+        <li>Презентации продуктов и услуг</li>
+        <li>Двуязычные версии (RU/EN)</li>
+      </ul>
+    </div>
+    <div class="svc r d3">
+      <div class="svc-num">03</div>
+      <div class="svc-name">Верстка документов</div>
+      <div class="svc-tagline">Документ, который читают — а не листают</div>
+      <p class="svc-desc">Превращаю объёмные материалы в системные, удобные документы с чёткой навигацией. От технических каталогов до корпоративных гайдов.</p>
+      <ul class="svc-list">
+        <li>Каталоги и прайс-листы</li>
+        <li>Корпоративные руководства</li>
+        <li>Многостраничные журналы</li>
+        <li>Перевод + верстка (RU/EN)</li>
+      </ul>
+    </div>
+    <div class="svc r d4">
+      <div class="svc-num">04</div>
+      <div class="svc-name">Лендинги</div>
+      <div class="svc-tagline">Страница, которая продаёт, пока вы спите</div>
+      <p class="svc-desc">Проектирую структуру лендинга как сценарий: каждый блок ведёт посетителя к целевому действию. Дизайн — на Tilda или в виде готового макета.</p>
+      <ul class="svc-list">
+        <li>Прототипирование структуры</li>
+        <li>UX и визуальная иерархия</li>
+        <li>Адаптация под целевую аудиторию</li>
+        <li>Вёрстка на Tilda</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="cases" id="cases">
+  <div class="eyebrow r">Кейсы</div>
+  <div class="section-h r">Реальные проекты —<br>измеримые результаты</div>
+  <div class="cases-grid">
+
+    <!-- BIG: NEW YOU -->
+    <div class="case r">
+      <div class="case-visual"><div class="case-visual-placeholder">
+<img src="images/new_you.jpg" alt="NEW YOU">
+      </div></div>
+      <div class="case-body">
+        <span class="case-cat">Брендинг + 3D упаковка</span>
+        <div class="case-name">Косметический бренд NEW YOU</div>
+        <div class="case-role">Дизайнер бренда и упаковки / 3D-моделирование</div>
+        <p class="case-desc">Бренд выходил на рынок без визуальной системы. Нужно было создать всё с нуля — и сразу на уровне premium-сегмента. Разработала концепцию soft premium: металлик, перламутровая графика, тюбик бальзама спроектирован в 3D по индивидуальным параметрам и подготовлен к производству.</p>
+        <div class="case-result">
+          <div class="case-result-label">Результат</div>
+          <div class="case-result-text">Полная бренд-система: айдентика, брендбук, линейка упаковки с единым визуальным кодом, 3D-рендеры и производственно-готовые макеты. Проект масштабируем на новые продукты.</div>
+        </div>
+      </div>
+    </div>
+
+<div class="case r d2">
+      <div class="case-visual"><div class="case-visual-placeholder">
+<img src="images/hilton.jpg" alt="HILTON">
+      </div></div>
+      <div class="case-body">
+        <span class="case-cat">Корпоративная верстка</span>
+        <div class="case-name">HILTON — корпоративный гайд</div>
+        <div class="case-role">Дизайн и верстка многостраничного документа</div>
+        <p class="case-desc">138 страниц внутренних материалов в разных стилях — нужно было привести к единому корпоративному стандарту. Разработала модульную систему, единую навигацию, типографическую иерархию.</p>
+        <div class="case-result">
+          <div class="case-result-label">Результат</div>
+          <div class="case-result-text">Разрозненные файлы → системный корпоративный документ управленческого уровня, готовый к международному использованию.</div>
+        </div>
+      </div>
+    </div>
+
+ 
+
+
+
+   <div class="case r d4">
+      <div class="case-visual"><div class="case-visual-placeholder">
+        <img src="images/pdm.jpg" alt="PDM">
+      </div></div>
+      <div class="case-body">
+        <span class="case-cat">Презентация продукта</span>
+        <div class="case-name">PDM — медицинская одежда</div>
+        <div class="case-role">Дизайнер и структурирование</div>
+        <p class="case-desc">Бренд нужно было представить партнёрам не как каталог, а как систему. Выстроила подачу: сначала образ бренда — затем новый продукт как его логичное продолжение.</p>
+        <div class="case-result">
+          <div class="case-result-label">Результат</div>
+          <div class="case-result-text">+25–30% повторных контактов после переговоров. +20% роста интереса к новому продукту в первые месяцы.</div>
+        </div>
+      </div>
+    </div>
+
+  
+<div class="case r d1">
+      <div class="case-visual"><div class="case-visual-placeholder">
+<img src="images/kalintrade.jpg" alt="KALINTRADE">
+      </div></div>
+      <div class="case-body">
+        <span class="case-cat">Брендинг & Айдентика</span>
+        <div class="case-name">KALINTRADE — логистика</div>
+        <div class="case-role">Бренд-дизайнер</div>
+        <p class="case-desc">Разработала логотип и фирменный стиль для транспортной компании, специализирующейся на оптовых поставках из Китая. Буква «К» интегрирована с элементом глобальной сети. Контраст чёрного и красного — сила, скорость, технологичность.</p>
+        <div class="case-result">
+          <div class="case-result-label">Результат</div>
+          <div class="case-result-text">Современный B2B-визуал уровня международной торговли. Единая система для офлайн и digital. Айдентика работает как инструмент доверия в переговорах.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case r">
+      <div class="case-visual"><div class="case-visual-placeholder">
+<img src="images/karaka.jpg" alt="KARAKA">
+      </div></div>
+      <div class="case-body">
+        <span class="case-cat">Презентация B2B</span>
+        <div class="case-name">KARAKA — экспорт кофе</div>
+        <div class="case-role">Дизайнер презентации</div>
+        <p class="case-desc">Компании нужен был документ для международных переговоров — не просто красивые слайды, а инструмент доверия для иностранных партнёров. Выстроила логику: производство → продукт → сертификаты → цифры как аргументы.</p>
+        <div class="case-result">
+          <div class="case-result-label">Результат</div>
+          <div class="case-result-text">+32% повторных запросов после первых переговоров. +18% конверсии в детальное коммерческое обсуждение.</div>
+        </div>
+      </div>
+    </div>
+
+  
+
+
+
+    <div class="case r d3">
+      <div class="case-visual"><div class="case-visual-placeholder">
+<img src="images/mae.jpg" alt="MAE">
+      </div></div>
+      <div class="case-body">
+        <span class="case-cat">Верстка + перевод</span>
+        <div class="case-name">Медальянс Инжиниринг</div>
+        <div class="case-role">Перевод, дизайн и верстка каталога</div>
+        <p class="case-desc">Технический документ на английском без бренд-системы. Перевела, выстроила визуальную систему с нуля, создала 60+ страниц корпоративного каталога для фарм-сегмента.</p>
+        <div class="case-result">
+          <div class="case-result-label">Результат</div>
+          <div class="case-result-text">Профессиональный инструмент для переговоров и дистрибуции вместо англоязычного файла. База для всех последующих коммерческих материалов.</div>
+        </div>
+      </div>
+    </div>
+
+   
+
+  </div>
+</section>
+
+<!-- WHY -->
+</div>
+<section class="why" id="why">
+  <div>
+    <div class="eyebrow r">Почему я</div>
+    <div class="section-h r">Работаю как партнёр,<br>а не как исполнитель</div>
+    <div class="why-list">
+      <div class="why-item r d1">
+        <div class="why-icon">🎯</div>
+        <div>
+          <div class="why-title">Не жду идеального ТЗ</div>
+          <div class="why-desc">Помогу сформулировать задачу, выстроить структуру и понять, что именно нужно вашему бизнесу — даже если вы сами ещё не уверены.</div>
+        </div>
+      </div>
+      <div class="why-item r d2">
+        <div class="why-icon">📐</div>
+        <div>
+          <div class="why-title">Думаю как стратег, делаю как дизайнер</div>
+          <div class="why-desc">Каждое решение обосновано: почему такой шрифт, такой цвет, такая структура. Дизайн — инструмент, а не украшение.</div>
+        </div>
+      </div>
+      <div class="why-item r d3">
+        <div class="why-icon">✅</div>
+        <div>
+          <div class="why-title">Довожу до конца</div>
+          <div class="why-desc">Сдаю файлы в рабочем состоянии: готово к печати, к публикации, к переговорам. Без «доделайте сами».</div>
+        </div>
+      </div>
+      <div class="why-item r d4">
+        <div class="why-icon">🤝</div>
+        <div>
+          <div class="why-title">Работаю официально</div>
+          <div class="why-desc">Самозанятость, договор, счёт, чек об оплате. Никаких рисков для вашей бухгалтерии.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="why-right r">
+    <div class="why-stat">
+      <div class="why-stat-num">25<sub>+</sub></div>
+      <div class="why-stat-label">реализованных проектов</div>
+    </div>
+    <div class="why-stat accent">
+      <div class="why-stat-num">+32<sub>%</sub></div>
+      <div class="why-stat-label">рост запросов у клиентов</div>
+    </div>
+    <div class="why-stat">
+      <div class="why-stat-num">2000<sub>+</sub></div>
+      <div class="why-stat-label">страниц</div>
+    </div>
+    <div class="why-stat">
+      <div class="why-stat-num">3<sub>+</sub></div>
+      <div class="why-stat-label">года в коммерческом дизайне</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="eyebrow r">Как это работает</div>
+  <div class="section-h r">Ясный процесс<br>без неожиданностей</div>
+  <div class="process-row">
+    <div class="proc r d1">
+      <div class="proc-circle">01</div>
+      <div class="proc-title">Знакомство</div>
+      <div class="proc-desc">Обсуждаем задачу, аудиторию, цели. Помогаю сформулировать ТЗ, если его нет.</div>
+    </div>
+    <div class="proc r d2">
+      <div class="proc-circle">02</div>
+      <div class="proc-title">Стратегия</div>
+      <div class="proc-desc">Определяю характер бренда, тон, визуальное позиционирование на рынке.</div>
+    </div>
+    <div class="proc r d3">
+      <div class="proc-circle">03</div>
+      <div class="proc-title">Разработка</div>
+      <div class="proc-desc">Создаю дизайн с чёткой логикой. Правки — прозрачно и без потери фокуса.</div>
+    </div>
+    <div class="proc r d4">
+      <div class="proc-circle">04</div>
+      <div class="proc-title">Сдача</div>
+      <div class="proc-desc">Передаю рабочие файлы, готовые к использованию сразу: в печать, на сайт, в переговоры.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="eyebrow r">Контакты</div>
+  <h2 class="contact-h r">Есть задача?<br><em>Давайте разберёмся вместе</em></h2>
+  <p class="contact-sub r">Напишите в любой мессенджер — расскажите о проекте. Без скучных форм и долгих ожиданий. Обычно отвечаю в течение нескольких часов.</p>
+  <div class="contact-box r">
+    <div class="contact-links">
+      <a class="c-link" href="https://t.me/pro_dsgn_irina" target="_blank">
+        <div class="c-link-icon">✈️</div>
+        <div class="c-link-info"><strong>Telegram</strong><span>@pro_dsgn_irina — быстрее всего</span></div>
+        <div class="c-link-arr">→</div>
+      </a>
+      <a class="c-link" href="tel:+79777377269">
+        <div class="c-link-icon">📱</div>
+        <div class="c-link-info"><strong>WhatsApp / Телефон</strong><span>8 (977) 737-72-69</span></div>
+        <div class="c-link-arr">→</div>
+      </a>
+      <a class="c-link" href="mailto:irina101399@gmail.com">
+        <div class="c-link-icon">📧</div>
+        <div class="c-link-info"><strong>Email</strong><span>irina101399@gmail.com</span></div>
+        <div class="c-link-arr">→</div>
+      </a>
+    </div>
+   
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ирина Фрид</div>
+  <p class="contact-legal">Самозанятая (НПД) · Фрид Ирина Михайловна · ИНН 771823114538<br><a href="/privacy-policy.html" style="color:rgba(255,255,255,0.5);text-decoration:underline;font-size:11px;">Политика конфиденциальности</a> · <a href="/user-agreement.html" style="color:rgba(255,255,255,0.5);text-decoration:underline;font-size:11px;">Пользовательское соглашение</a></p>
+  <div class="footer-copy">© 2026 · Дизайн, который продаёт</div>
+</footer>
+
+<!-- COOKIE BANNER -->
+<div class="cookie-banner" id="cookieBanner">
+  <div class="cookie-text">
+    Этот сайт использует cookie для аналитики и корректной работы.
+    Подробнее — в <a href="/privacy-policy.html">Политике конфиденциальности</a>.
+  </div>
+  <div class="cookie-btns">
+    <button class="cookie-accept" style="cursor:pointer;pointer-events:auto;position:relative;z-index:1000;" onclick="hideCookieBanner()">Принять</button>
+    <button class="cookie-decline" style="cursor:pointer;pointer-events:auto;position:relative;z-index:1000;" onclick="hideCookieBanner()">Отклонить</button>
+  </div>
+</div>
+
+<script>
+  // Cookie banner
+  function acceptCookies() {
+    document.getElementById('cookieBanner').style.display = 'none';
+    try { localStorage.setItem('cookies_accepted', 'true'); } catch(e) {}
+  }
+  function declineCookies() {
+    document.getElementById('cookieBanner').style.display = 'none';
+    try { localStorage.setItem('cookies_accepted', 'false'); } catch(e) {}
+  }
+
+  // Cookie banner — запомнить выбор навсегда
+  function hideCookieBanner() {
+    document.getElementById('cookieBanner').style.cssText = 'display:none!important';
+    try { localStorage.setItem('cookies_decided', '1'); } catch(e) {}
+  }
+
+  // Показать баннер только если ещё не решили
+  (function() {
+    try {
+      if (localStorage.getItem('cookies_decided')) {
+        document.getElementById('cookieBanner').style.cssText = 'display:none!important';
+      }
+    } catch(e) {}
+  })();
+
+  // Nav scroll effect
+  window.addEventListener('scroll', function() {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Показать все элементы сразу
+  document.querySelectorAll('.r').forEach(function(el) {
+    el.classList.add('reveal', 'up');
+  });
+</script>
+</body>
+</html>
